@@ -43,6 +43,7 @@
 - It set the HTTP status for the response. response such as 200,201,204,404 etc.
 
 # sendStatus() status
+
 - sendStatus takes status code as input parameter during res.send() and sends registered status code to teh response body if there is unknown status code then the default status code will be 404.
 
 # What are http request methods?
@@ -54,11 +55,15 @@
 - patch
 
 # What are http response status codes?
-- http  response status code indicates whether the the http request has been successfully completed.
+
+- http response status code indicates whether the the http request has been successfully completed.
 
 # What is purpose of port?
+
 - The purpose of the port is to give the platform to server to run it's functionality.
 
 # async/await
-- async and await are javascript 
+
+- async and await are javascript function.In this async means asynchronous function in which the function action is given promise if and await
+
 # express.json()

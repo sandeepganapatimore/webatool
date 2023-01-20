@@ -28,17 +28,4 @@ const synDb = () => {
 
 synDb();
 
-export const ScanModel = sequelize.define(
-  "Scans",
-  {
-    // Model attributes are defined here
-    url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    // Other model options go here
-  }
-);
-1;
+export default sequelize;
