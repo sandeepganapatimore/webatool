@@ -1,5 +1,6 @@
 import express from "express";
 import { ScanModel } from "./db.js";
+
 // create an instance of express.
 const app = express();
 
@@ -8,12 +9,19 @@ const port = 3000;
 // req and res should be json
 app.use(express.json());
 
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(requestTime);
+
 // app responds with fecth all records from scans table for requests to the root URL (/) or route
 app.get("/", async (req, res) => {
   const result = await ScanModel.findAll();
   res.send(result);
 });
-
+// fetch particular record from the database scan table by passing the url  params as id.
 app.get("/:id", async (req, res) => {
   console.log(req.params);
   const result = await ScanModel.findAll({
@@ -26,6 +34,7 @@ app.get("/:id", async (req, res) => {
 
 // create a resource
 app.post("/", async (req, res) => {
+  console.log(req?.body); // { url: 'https://github.com/sandeepganapatimore/' }
   const result = await ScanModel.create({ url: req?.body?.url });
   res.status(201).send(result);
 });
