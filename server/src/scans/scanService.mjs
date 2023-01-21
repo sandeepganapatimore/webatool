@@ -1,5 +1,8 @@
 import ScanModel from "./scanModel.mjs";
 
+import { create as createScanDetails } from "../scanDetails/scanDetailService.mjs";
+import analyzeUrl from "../utils/analyzeUrl.mjs";
+
 async function getAll() {
   return await ScanModel.findAll();
 }
@@ -32,7 +35,11 @@ async function update(id, url) {
 }
 
 async function create(url) {
-  return await ScanModel.create({ url: url });
+  const scanRow = await ScanModel.create({ url: url });
+  const results = await analyzeUrl(url);
+  const source = { scanId: scanRow?.id, results: results };
+  await createScanDetails(source);
+  return scanRow;
 }
 
 export { getAll, getById, remove, update, create };

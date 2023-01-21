@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize("rapdb", "appdev", "dev123", {
   host: "localhost",
@@ -27,5 +27,6 @@ const synDb = () => {
 };
 
 synDb();
+
 
 export default sequelize;

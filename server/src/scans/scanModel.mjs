@@ -12,7 +12,7 @@ const ScanModel = sequelize.define(
     },
   },
   {
-    // Other model options go here
+    timestamps: false,
   }
 );
 
