@@ -18,4 +18,5 @@ scanRoutes.delete("/scans/:id", removeScans);
 scanRoutes.put("/scans/:id", updateScans);
 
 scanRoutes.get("/scans/:id", getScansById);
+
 export default scanRoutes;

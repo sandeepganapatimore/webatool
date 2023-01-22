@@ -64,6 +64,11 @@
 
 # async/await
 
-- async and await are javascript function.In this async means asynchronous function in which the function action is given promise if and await
+- async and await are javascript function.In this async means asynchronous function in which the function action is given promise and executer inside the function is given await it returns the promise value which is executed by the async function.
+- await must be declared inside the javascript function.
+- if we declare the await outside the async function it will throw us an error.
 
 # express.json()
+
+- It is middleware which is used in the express() which is used for parsing the incoming values and returns the value in the based on body-parser.
+
