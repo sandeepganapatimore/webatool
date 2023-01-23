@@ -3,7 +3,7 @@ import {
   getScans,
   createScans,
   removeScans,
-  updateScans,
+  // updateScans,
   getScansById,
 } from "./scanController.mjs";
 
@@ -15,7 +15,7 @@ scanRoutes.post("/scans", createScans);
 
 scanRoutes.delete("/scans/:id", removeScans);
 
-scanRoutes.put("/scans/:id", updateScans);
+// scanRoutes.put("/scans/:id", updateScans);
 
 scanRoutes.get("/scans/:id", getScansById);
 

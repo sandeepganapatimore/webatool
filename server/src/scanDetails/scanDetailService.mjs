@@ -1,17 +1,5 @@
 import scanDetailModel from "./scanDetailModel.mjs";
 
-async function getAll() {
-  return await scanDetailModel.findAll();
-}
-
-async function getById(id) {
-  return await scanDetailModel.findAll({
-    where: {
-      id: id,
-    },
-  });
-}
-
 async function update(id, results) {
   return await scanDetailModel.update(
     { results: results },
@@ -21,19 +9,44 @@ async function update(id, results) {
   );
 }
 
-async function remove(id) {
+async function remove(scanId) {
   return await scanDetailModel.destroy({
     where: {
-      id: id,
+      ScanId: scanId,
     },
   });
 }
 
 async function create(source) {
+  // here we get the parameter value as
+  // the source which is passed from the scanController module
   return await scanDetailModel.create({
     ScanId: source.scanId,
     results: source.results,
   });
 }
 
-export { getAll, getById, update, remove, create };
+async function getByScanId(scanId) {
+  return await scanDetailModel.findAll({
+    where: {
+      ScanId: scanId,
+    },
+  });
+}
+
+export { update, remove, create, getByScanId };
+
+/* Region not need now
+
+// async function getAll() {
+//   return await scanDetailModel.findAll();
+// }
+
+// async function getById(id) {
+//   return await scanDetailModel.findAll({
+//     where: {
+//       id: id,
+//     },
+//   });
+// }
+*/
