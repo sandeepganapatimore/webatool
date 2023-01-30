@@ -11,5 +11,5 @@ const analyzeUrl = async (url) => {
   await browser.close();
   return results;
 };
-
+  
 export default analyzeUrl;

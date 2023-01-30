@@ -1,16 +1,10 @@
 import ScanModel from "./scanModel.mjs";
 
-async function  getAll() {
+async function getAll() {
   return await ScanModel.findAll();
 }
 
 async function getById(id) {
-  // return await ScanModel.findAll({
-  //   where: {
-  //     id: id,
-  //   },
-  // });
-
   return await ScanModel.findByPk(Number(id), {
     include: ["ScanDetails"],
   });
@@ -35,8 +29,8 @@ async function update(id, url) {
   );
 }
 
-async function create(url) {
-  return await ScanModel.create({ url: url });
+async function create(url, trans) {
+  return await ScanModel.create({ url: url }, { transaction: trans });
 }
 
 export { getAll, getById, remove, update, create };

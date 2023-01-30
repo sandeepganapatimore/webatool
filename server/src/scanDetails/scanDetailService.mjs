@@ -17,13 +17,16 @@ async function remove(scanId) {
   });
 }
 
-async function create(source) {
+async function create(source, trans) {
   // here we get the parameter value as
   // the source which is passed from the scanController module
-  return await scanDetailModel.create({
-    ScanId: source.scanId,
-    results: source.results,
-  });
+  return await scanDetailModel.create(
+    {
+      ScanId: source.scanId,
+      results: source.results,
+    },
+    { transaction: trans }
+  );
 }
 
 async function getByScanId(scanId) {

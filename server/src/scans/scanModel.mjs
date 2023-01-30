@@ -6,7 +6,7 @@ const ScanModel = sequelize.define("Scans", {
   // Model attributes are defined here
   url: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false,   
   },
 });
 

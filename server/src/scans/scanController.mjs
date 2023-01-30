@@ -4,6 +4,7 @@ import {
   create as createScanDetails,
   remove as removeScanDetails,
 } from "../scanDetails/scanDetailService.mjs";
+import sequelize from "../db/db.mjs";
 
 async function getScans(req, res) {
   const result = await getAll();
@@ -33,39 +34,36 @@ async function createScans(req, res) {
   }
 
   try {
-    // we pass the input url to the create() method after all the validations. it will create
-    // the column in table for this url.
-    const scanRow = await create(url);
-    console.log("Scan row", scanRow);
-    // we then pass the same url to the analyzeurl() we calculating accessibility results.
-    const results = await analyzeUrl(url);
-    // Here we put the scanRow?.id value in the ScanId because scanId is the foreign key of the scansDetails
-    // table. We create the object of scanId and analyzed result in the createScanDetails table.
-    const source = { scanId: scanRow?.id, results: results };
-    // Then this source object is passed to the createScanDetails() method
+    await sequelize.transaction(async (trans) => {
+      // we pass the input url to the create() method after all the validations. it will create
+      // the column in table for this url.
+      const scanRow = await create(url, trans);
 
-    await createScanDetails(source);
+      // we then pass the same url to the analyzeurl() we calculating accessibility results.
+      const results = await analyzeUrl(url);
+      // Here we put the scanRow?.id value in the ScanId because scanId is the foreign key of the scansDetails
+      // table. We create the object of scanId and analyzed result in the createScanDetails table.
+      const source = { scanId: scanRow?.id, results: results };
+      // Then this source object is passed to the createScanDetails() method
 
-    // 201 we send the status code of the creation.
-    res.status(201);
-    // we pass the response value in json formate by creating three entities success,data and message
-    res.json({
-      success: true,
-      data: { scanId: scanRow.id },
-      message: "Created successfully",
+      await createScanDetails(source, trans);
+
+      // 201 we send the status code of the creation.
+      res.status(201);
+      // we pass the response value in json formate by creating three entities success,data and message
+      res.json({
+        success: true,
+        data: { scanId: scanRow.id },
+        message: "Created successfully",
+      });
     });
-
-  }
-  
-  catch (error) {
+  } catch (error) {
     // error message we send 404 as status code.
     res.status(404).json({
       success: false,
       error: error.message,
     });
   }
-
-
 }
 
 async function removeScans(req, res) {
@@ -76,7 +74,6 @@ async function removeScans(req, res) {
     res.json({ success: false, error: "Id is not valid" });
     return;
   }
-
 
   try {
     await removeScanDetails(id);
@@ -107,7 +104,6 @@ async function getScansById(req, res) {
 
   try {
     const result = await getById(id);
-
 
     if (result === null) {
       res.status(404).json({ success: true, error: "Scan records not found" });
