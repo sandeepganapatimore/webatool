@@ -34,3 +34,4 @@ async function create(url, trans) {
 }
 
 export { getAll, getById, remove, update, create };
+

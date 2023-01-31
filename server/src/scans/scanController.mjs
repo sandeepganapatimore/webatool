@@ -15,11 +15,11 @@ async function createScans(req, res) {
   const { url } = req.body;
 
   // Ensure a URL was provided.
-  if (!url) {
-    res.status(404);
-    res.json({ success: false, error: "url is required" });
-    return;
-  }
+  // if (!url) {
+  //   res.status(404);
+  //   res.json({ success: false, error: "url is required" });
+  //   return;
+  // }
 
   // Ensure the URL is valid.
   try {
@@ -35,30 +35,18 @@ async function createScans(req, res) {
 
   try {
     await sequelize.transaction(async (trans) => {
-      // we pass the input url to the create() method after all the validations. it will create
-      // the column in table for this url.
       const scanRow = await create(url, trans);
-
-      // we then pass the same url to the analyzeurl() we calculating accessibility results.
       const results = await analyzeUrl(url);
-      // Here we put the scanRow?.id value in the ScanId because scanId is the foreign key of the scansDetails
-      // table. We create the object of scanId and analyzed result in the createScanDetails table.
       const source = { scanId: scanRow?.id, results: results };
-      // Then this source object is passed to the createScanDetails() method
-
       await createScanDetails(source, trans);
-
-      // 201 we send the status code of the creation.
       res.status(201);
-      // we pass the response value in json formate by creating three entities success,data and message
       res.json({
         success: true,
         data: { scanId: scanRow.id },
         message: "Created successfully",
-      });
+      }); 
     });
   } catch (error) {
-    // error message we send 404 as status code.
     res.status(404).json({
       success: false,
       error: error.message,
@@ -121,4 +109,3 @@ async function getScansById(req, res) {
 }
 
 export { getScans, createScans, removeScans, getScansById };
-

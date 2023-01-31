@@ -30,3 +30,4 @@ const synDb = () => {
 synDb();
 
 export default sequelize;
+
