@@ -13,26 +13,6 @@ async function getScans(req, res) {
 
 async function createScans(req, res) {
   const { url } = req.body;
-
-  // Ensure a URL was provided.
-  // if (!url) {
-  //   res.status(404);
-  //   res.json({ success: false, error: "url is required" });
-  //   return;
-  // }
-
-  // Ensure the URL is valid.
-  try {
-    new URL(url);
-    // const input = new URL(url);
-    // input.hostname;
-    // console.log(input.hostname);
-  } catch (error) {
-    res.status(400);
-    res.json({ success: false, error: `Invalid URL: ${error?.message}` });
-    return;
-  }
-
   try {
     await sequelize.transaction(async (trans) => {
       const scanRow = await create(url, trans);
@@ -44,7 +24,7 @@ async function createScans(req, res) {
         success: true,
         data: { scanId: scanRow.id },
         message: "Created successfully",
-      }); 
+      });
     });
   } catch (error) {
     res.status(404).json({
