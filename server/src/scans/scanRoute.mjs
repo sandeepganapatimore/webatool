@@ -21,9 +21,6 @@ function validUrl(req, res, next) {
   // Ensure the URL is valid.
   try {
     new URL(url);
-    // const input = new URL(url);
-    // input.hostname;
-    // console.log(input.hostname);
   } catch (error) {
     res.status(400);
     res.json({ success: false, error: `Invalid URL: ${error?.message}` });
