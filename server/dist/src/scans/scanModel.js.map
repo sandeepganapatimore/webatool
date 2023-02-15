@@ -1,0 +1,1 @@
+{"version":3,"file":"scanModel.js","sourceRoot":"","sources":["../../../src/scans/scanModel.ts"],"names":[],"mappings":";;;;;AAAA,uCAAsC;AACtC,gDAAiC;AAEjC,oBAAoB;AACpB,IAAM,SAAS,GAAG,YAAS,CAAC,MAAM,CAAC,OAAO,EAAE;IAC1C,oCAAoC;IACpC,GAAG,EAAE;QACH,IAAI,EAAE,qBAAS,CAAC,MAAM;QACtB,SAAS,EAAE,KAAK;KACjB;CACF,CAAC,CAAC;AAEH,kBAAe,SAAS,CAAC"}

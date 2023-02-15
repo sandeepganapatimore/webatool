@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../db/db.mjs";
-import ScanModel from "../scans/scanModel.mjs";
+import sequelize from "../db/db";
+import ScanModel from "../scans/scanModel";
+
 
 const scanDetailModel = sequelize.define("ScanDetails", {
   // model attributes
