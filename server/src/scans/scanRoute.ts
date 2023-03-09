@@ -8,7 +8,7 @@ class ScanRouter {
     this.scanRoutes.get("/scans", this.scanController.getScans);
     this.scanRoutes.post(
       "/scans",
-      // this.validUrl(),
+      this.validUrl,
       this.scanController.createScans
     );
 
@@ -19,7 +19,7 @@ class ScanRouter {
     this.scanRoutes.get("/scans/:id", this.scanController.getScansById);
   }
 
-  validUrl(req, res, next) {
+  validUrl(req: any, res: any, next: any) {
     // Ensure a URL was provided.
     const { url } = req.body;
     console.log(req.body);
@@ -33,7 +33,7 @@ class ScanRouter {
       new URL(url);
     } catch (error) {
       res.status(400);
-      res.json({ success: false, error: `Invalid URL: ${error?.message}` });
+      res.json({ success: false, error: `Invalid URL` });
       return;
     }
     next();

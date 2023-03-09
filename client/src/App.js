@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { AppContextWrapper } from "./ContextState";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
+const Home = React.lazy(() => import("./Home/Home"));
+const DashBoard = React.lazy(() => import("./DashBoard/Dashboard"));
+const ScanTable = React.lazy(() => import("./Scan/Scans"));
+const ScanDetails = React.lazy(() => import("./Scan/ScanDetails"));
+const IssueDetails = React.lazy(() => import("./Scan/IssueDetails"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <AppContextWrapper>
+      <BrowserRouter>
+        <Suspense
+          fallback={
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                justifyItems: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/scans" element={<ScanTable />} />
+            <Route path="/scans/:id" element={<ScanDetails />} />
+            <Route path="/scans/:id/:name" element={<IssueDetails />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </AppContextWrapper>
   );
 }
 

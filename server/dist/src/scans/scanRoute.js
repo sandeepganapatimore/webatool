@@ -32,7 +32,7 @@ var ScanRouter = /** @class */ (function () {
         }
         catch (error) {
             res.status(400);
-            res.json({ success: false, error: "Invalid URL: ".concat(error === null || error === void 0 ? void 0 : error.message) });
+            res.json({ success: false, error: "Invalid URL" });
             return;
         }
         next();
