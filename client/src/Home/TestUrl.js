@@ -5,7 +5,8 @@ import Button from "@mui/material/Button";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import { useNavigate } from "react-router-dom";
-import FormController from "../Scan/FormController";
+import FormController from '../Components/Forms/FormController';
+
 import { validUrl } from "../utils/helper";
 
 export default function TestUrl(props) {
@@ -106,6 +107,7 @@ export default function TestUrl(props) {
           validUrl={validUrl}
           handleCallback={handleCallback}
           width="100%"
+          buttonName="Test Url"
         />
       </Box>
       {loading && (

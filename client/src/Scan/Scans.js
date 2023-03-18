@@ -10,8 +10,9 @@ import Button from "@mui/material/Button";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 // import {  GridColDef, GridRowId } from '@mui/x-data-grid';
-import FormController from "./FormController";
+import FormController from '../Components/Forms/FormController';
 import { validUrl } from "../utils/helper";
+
 const columns = [
   { field: "url", headerName: "URL", flex: 1, sortable: false },
   {
@@ -112,24 +113,8 @@ export default function ScanTable() {
           validUrl={validUrl}
           handleCallback={handleCallback}
           width="100%"
+          buttonName="Search"
         />
-          <Button
-            tabIndex={0}
-            aria-pressed="false"
-            role="button"
-            variant="contained"
-            sx={{
-              height: "60px",
-              backgroundColor: "#7331df",
-              textTransform: "none",
-              color: "#ffffff",
-              ml: 2,
-              mt: 1,
-            }}
-            onClick={handleCallback}
-          >
-            Search
-          </Button>
         </Box>
         {data ? (
           <div style={{ height: 400, width: "100%" }}>

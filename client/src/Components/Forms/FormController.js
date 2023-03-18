@@ -4,7 +4,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box/Box";
 
-function FormController({ url, setUrl, validUrl, handleCallback }) {
+function FormController({ url, setUrl, validUrl, handleCallback, buttonName }) {
   return (
     <Box>
       {" "}
@@ -60,7 +60,7 @@ function FormController({ url, setUrl, validUrl, handleCallback }) {
         onClick={handleCallback}
         disabled={!validUrl(url)}
       >
-        Test Url
+        {buttonName}
       </Button>
     </Box>
   );
