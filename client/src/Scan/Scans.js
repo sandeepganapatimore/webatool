@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 // import {  GridColDef, GridRowId } from '@mui/x-data-grid';
+import FormController from "./FormController";
+import { validUrl } from "../utils/helper";
 const columns = [
   { field: "url", headerName: "URL", flex: 1, sortable: false },
   {
@@ -104,26 +106,13 @@ export default function ScanTable() {
             mt: 2,
           }}
         >
-          <FormControl
-            variant="outlined"
-            width="100%"
-            fullWidth
-            sx={{ width: "65%", mt: 1, ml: 6 }}
-          >
-            <OutlinedInput
-              sx={{
-                borderColor: "#7a757f",
-                backgroundColor: "#e7e0eb",
-                height: "60px",
-              }}
-              role="textbox"
-              placeholder="place url here"
-              aria-placeholder="place url here"
-              size="large"
-              onChange={(e) => setSearchValue(e.target.value)}
-              id="url-text"
-            />
-          </FormControl>
+         <FormController
+          setUrl={setSearchValue}
+          url={searchValue}
+          validUrl={validUrl}
+          handleCallback={handleCallback}
+          width="100%"
+        />
           <Button
             tabIndex={0}
             aria-pressed="false"

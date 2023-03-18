@@ -20,3 +20,13 @@ export function dateFormat(date) {
   const year = newDate.getFullYear();
   return `${day} ${monthName} ${year}`;
 }
+
+export  function validUrl(inputUrl){
+  try {
+    new URL(inputUrl);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+

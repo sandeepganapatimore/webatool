@@ -6,15 +6,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import { useNavigate } from "react-router-dom";
 import FormController from "../Scan/FormController";
-
-const validUrl = (inputUrl) => {
-  try {
-    new URL(inputUrl);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
+import { validUrl } from "../utils/helper";
 
 export default function TestUrl(props) {
   const { setError } = props;
