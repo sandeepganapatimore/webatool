@@ -1,13 +1,18 @@
-import AuthServices from "./AuthServices";
 import jwt from "jsonwebtoken";
+import AuthServices from "./AuthServices";
 
 export class AuthController {
   async signup(req: any, res: any) {
-    return await res.send({
-      success: true,
-      data: null,
-      message: "Created successfully",
-    });
+    try {
+      AuthServices.signup(req.body);
+      return await res.send({
+        success: true,
+        data: null,
+        message: "Created successfully",
+      });
+    } catch (error) {
+      return res.send({ error });
+    }
   }
 
   async signIn(req: any, res: any, next: any) {

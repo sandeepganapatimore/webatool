@@ -1,33 +1,15 @@
-import AuthModel from "./AuthModel";
-import crypto from "crypto";
+import UserModel from "../users/UserModel";
+import bcrypt from "bcrypt";
 
 class AuthServices {
-  async signup(username: string, password: string) {
-    var salt = crypto.randomBytes(16);
-    crypto.pbkdf2(
-      password,
-      salt,
-      31000,
-      32,
-      "more32",
-      async function (err, hashPassword) {
-        if (err) {
-          return err;
-        }
-        return await AuthModel.create({
-          username: username,
-          password: hashPassword,
-        });
-      }
-    );
-  }
-
-  async login(username, password) {
-    return await AuthModel.findOne({
-      where: {
-        username: username,
-        password: password,
-      },
+  async signup(source: any) {
+    const { firstName, lastName, email, password, allowExtraEmails } = source;
+    return await UserModel.create({
+      firstName,
+      lastName,
+      email,
+      password: bcrypt.hashSync(password, 10),
+      allowExtraEmails,
     });
   }
 }
