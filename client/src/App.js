@@ -9,6 +9,7 @@ const DashBoard = React.lazy(() => import("./DashBoard/Dashboard"));
 const ScanTable = React.lazy(() => import("./Scan/Scans"));
 const ScanDetails = React.lazy(() => import("./Scan/ScanDetails"));
 const IssueDetails = React.lazy(() => import("./Scan/IssueDetails"));
+const SignUp = React.lazy(() => import("./Auth/SignUp"));
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
               <Route path="/scans" element={<ScanTable />} />
               <Route path="/scans/:id" element={<ScanDetails />} />
               <Route path="/scans/:id/:name" element={<IssueDetails />} />
+              <Route path="/user/signup" element={<SignUp />} />
+              <Route path="/user/signin" element={<SignUp />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
