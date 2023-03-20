@@ -15,10 +15,11 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
+// import Button from "@mui/material/Button";
 const pages = [
   { name: "Documentation", link: "/docs" },
   { name: "Dashboard", link: "/dashboard" },
+  // { name: "Login", link: "/user/signin" },
 ];
 
 function HeaderMobile() {
@@ -77,6 +78,7 @@ function HeaderMobile() {
             </MenuItem>
           ))}
         </Menu>
+        <Button>Login</Button>
       </Box>
       <Typography
         variant="h5"
