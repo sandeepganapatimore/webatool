@@ -10,16 +10,12 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-// import Button from "@mui/material/Button";
+
 const pages = [
   { name: "Documentation", link: "/docs" },
   { name: "Dashboard", link: "/dashboard" },
-  // { name: "Login", link: "/user/signin" },
+  { name: "Login", link: "/user/signin" },
 ];
 
 function HeaderMobile() {
@@ -35,7 +31,7 @@ function HeaderMobile() {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+      <Box sx={{ flexGrow: 2, display: { xs: "flex", md: "none" } }}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -78,26 +74,7 @@ function HeaderMobile() {
             </MenuItem>
           ))}
         </Menu>
-        <Button>Login</Button>
       </Box>
-      <Typography
-        variant="h5"
-        noWrap
-        component="a"
-        href=""
-        sx={{
-          mr: 2,
-          flexGrow: 1,
-          fontFamily: "monospace",
-          fontWeight: 500,
-          letterSpacing: ".3rem",
-          textDecoration: "none",
-          color: "#1d1b1e",
-          display: { xs: "flex", md: "none" },
-        }}
-      >
-        WEBATOOL
-      </Typography>
     </>
   );
 }
