@@ -75,7 +75,7 @@ export default function ScanTable() {
         page: paginationModel.page,
         pageSize: paginationModel.pageSize,
         search: searchValue,
-        order: ["createdAt", "ASC" ? "DSC" : "ASC"],
+        order: ["createdAt", "ASC"],
         field: sortingModel.field,
         sort: sortingModel.sort,
       }),
@@ -113,11 +113,13 @@ export default function ScanTable() {
             buttonName="Search"
           />
         </Box>
+        {/* {console.log("data", data)} */}
         {data ? (
           <div style={{ height: 400, width: "100%" }}>
             <DataGrid
               sx={{
                 mt: 2,
+                // height: "0px",
               }}
               disableColumnFilter
               disableColumnMenu

@@ -4,13 +4,13 @@ import passport from "passport";
 
 class AuthRouter {
   authRoutes = express.Router();
-  scanController = new AuthController();
+  authController = new AuthController();
   constructor() {
-    this.authRoutes.post("/user/signup", this.scanController.signup);
+    this.authRoutes.post("/user/signup", this.authController.signup);
     this.authRoutes.post(
       "/user/signin",
       passport.authenticate("signin", { session: false }),
-      this.scanController.signIn
+      this.authController.signIn
     );
   }
 }

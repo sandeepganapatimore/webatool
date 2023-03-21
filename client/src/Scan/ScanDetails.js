@@ -82,11 +82,7 @@ export default function ScanDetails() {
 
   return (
     <Layout>
-      <Grid
-        container
-        spacing={2}
-        sx={{ display: { xs: "none", md: "flex" }, mt: 4 }}
-      >
+      <Grid container spacing={2} sx={{ display: { xs: "none", md: "flex" } }}>
         <Grid item xs={6}>
           <Grid container spacing={2}>
             {pairs?.map((item) => {
@@ -118,7 +114,7 @@ export default function ScanDetails() {
           </Grid>
         </Grid>
         <Grid item xs={6}>
-          <PieChart results={scanDetails?.results} />
+          <PieChart results={scanDetails?.results} sx={{ height: "50px" }} />
         </Grid>
       </Grid>
 

@@ -27,5 +27,12 @@ export default function PieChart(props) {
     results?.incomplete?.length,
     results?.passes?.length,
   ];
-  return <Pie data={chartConfig(arr)}  />;
+  return (
+    <Pie
+      data={chartConfig(arr)}
+      width={"90%"}
+      height={"350px"}
+      options={{ maintainAspectRatio: false }}
+    />
+  );
 }
