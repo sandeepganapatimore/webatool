@@ -6,11 +6,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { dateFormat } from "../utils/helper";
 import { DataGrid } from "@mui/x-data-grid";
-import Button from "@mui/material/Button";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import FormControl from "@mui/material/FormControl";
-// import {  GridColDef, GridRowId } from '@mui/x-data-grid';
-import FormController from '../Components/Forms/FormController';
+
+import FormController from "../Components/Forms/FormController";
 import { validUrl } from "../utils/helper";
 
 const columns = [
@@ -34,7 +31,6 @@ const columns = [
 
 export default function ScanTable() {
   const [selectionModel, setSelectionModel] = useState();
-
 
   const [data, setData] = useState();
   const [searchValue, setSearchValue] = useState("");
@@ -96,6 +92,7 @@ export default function ScanTable() {
     sortingModel.field,
     sortingModel.sort,
   ]);
+
   return (
     <Layout>
       <Container>
@@ -107,14 +104,14 @@ export default function ScanTable() {
             mt: 2,
           }}
         >
-         <FormController
-          setUrl={setSearchValue}
-          url={searchValue}
-          validUrl={validUrl}
-          handleCallback={handleCallback}
-          width="100%"
-          buttonName="Search"
-        />
+          <FormController
+            setUrl={setSearchValue}
+            url={searchValue}
+            validUrl={validUrl}
+            handleCallback={handleCallback}
+            width="100%"
+            buttonName="Search"
+          />
         </Box>
         {data ? (
           <div style={{ height: 400, width: "100%" }}>
@@ -136,7 +133,7 @@ export default function ScanTable() {
                 if (selection.length > 1) {
                   const selectionSet = new Set(selectionModel);
                   const result = selection.filter((s) => !selectionSet.has(s));
-      
+
                   setSelectionModel(result);
                 } else {
                   setSelectionModel(selection);
