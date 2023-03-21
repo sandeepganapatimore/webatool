@@ -75,7 +75,7 @@ export default function ScanTable() {
         page: paginationModel.page,
         pageSize: paginationModel.pageSize,
         search: searchValue,
-        order: ["createdAt", "ASC"],
+        order: ["createdAt", "ASC" ? "DSC" : "ASC"],
         field: sortingModel.field,
         sort: sortingModel.sort,
       }),
