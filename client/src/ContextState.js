@@ -19,6 +19,32 @@ const AppContextWrapper = ({ children }) => {
     dispatch([]);
   }, []);
 
+  const Authenticate = React.useCallback((token) => {
+    document.cookie = `token=${token}; SameSite=None; Secure`;
+  }, []);
+
+  const getToken = () => {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
+  };
+
+  const logOut = React.useCallback(() => {
+    document.cookie = `token=${""}; SameSite=None; Secure`;
+  }, []);
+
+  const isAuthenticated = () => {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
+    if (cookieValue) {
+      return true;
+    }
+    return false;
+  };
+
   React.useEffect(() => {
     if (localStorage.getItem("sections")) {
       dispatch(JSON.parse(localStorage.getItem("sections")));
@@ -26,7 +52,17 @@ const AppContextWrapper = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ ...state, addItem, removeItem }}>
+    <AppContext.Provider
+      value={{
+        ...state,
+        addItem,
+        removeItem,
+        Authenticate,
+        isAuthenticated,
+        logOut,
+        getToken,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

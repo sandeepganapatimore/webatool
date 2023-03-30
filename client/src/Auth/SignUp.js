@@ -13,7 +13,7 @@ import Copyright from "../Components/Copyright";
 import Container from "@mui/material/Container";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { useAppContext } from "../ContextState";
 function validation(input, fieldName, target) {
   for (const property in input.validity) {
     const type = input.validity[property] ? property : "";
@@ -30,6 +30,7 @@ function validation(input, fieldName, target) {
   }
 }
 export default function SignUp() {
+  const { Authenticate, isAuthenticated, getToken } = useAppContext();
   const [formState, setFormState] = React.useState(new Map());
 
   const { pathname } = useLocation();
@@ -46,73 +47,37 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const firstName = event.target["firstName"];
-    const lastName = event.target["lastName"];
-    const email = event.target["email"];
-    const password = event.target["password"];
-    console.log(email.validity["firstName"]);
-    setFormState(
-      (prev) =>
-        new Map([
-          ...prev,
-          ["firstName", validation(firstName, "firstName", event.target)],
-        ])
-    );
-    setFormState(
-      (prev) =>
-        new Map([
-          ...prev,
-          ["lastName", validation(lastName, "lastName", event.target)],
-        ])
-    );
-    setFormState(
-      (prev) =>
-        new Map([
-          ...prev,
-          ["email", validation(lastName, "email", event.target)],
-        ])
-    );
-    setFormState(
-      (prev) =>
-        new Map([
-          ...prev,
-          ["password", validation(lastName, "password", event.target)],
-        ])
-    );
-    if (
-      firstName.validity.valid &&
-      lastName.validity.valid &&
-      email.validity.valid &&
-      password.validity.valid
-    ) {
-      const data = new FormData(event.currentTarget);
-      fetch(
-        `http://localhost:8000/api/user/${
-          pathname.includes("signup") ? "signup" : "signin"
-        }`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: data.get("email"),
-            password: data.get("password"),
-            firstName: data.get("firstName"),
-            lastName: data.get("lastName"),
-            allowExtraEmails: checked,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data?.success && data?.data?.token) {
+    const data = new FormData(event.currentTarget);
+    fetch(
+      `http://localhost:8000/api/user/${
+        pathname.includes("signup") ? "signup" : "signin"
+      }`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: data.get("email"),
+          password: data.get("password"),
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          allowExtraEmails: checked,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.success && data?.data?.token) {
+          Authenticate(data?.data?.token);
+          console.log(isAuthenticated());
+          if (isAuthenticated()) {
             navigate(`/scans`);
-          } else if (data?.success) {
-            navigate(`/user/signin`);
           }
-        });
-    }
+        } else if (data?.success) {
+          navigate(`/user/signin`);
+        }
+      });
   };
 
   return (

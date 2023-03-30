@@ -11,6 +11,13 @@ const ScanDetails = React.lazy(() => import("./Scan/ScanDetails"));
 const IssueDetails = React.lazy(() => import("./Scan/IssueDetails"));
 const SignUp = React.lazy(() => import("./Auth/SignUp"));
 
+// import Home from "./Home/Home";
+// import DashBoard from "./DashBoard/Dashboard";
+// import ScanTable from "./Scan/Scans";
+// import ScanDetails from "./Scan/ScanDetails";
+// import IssueDetails from "./Scan/IssueDetails";
+// import SignUp from "./Auth/SignUp";
+
 function App() {
   return (
     <Box sx={{ backgroundColor: "#fffbff" }}>
@@ -41,7 +48,7 @@ function App() {
           </Suspense>
         </BrowserRouter>
       </AppContextWrapper>
-    </Box>
+    </Box>    
   );
 }
 

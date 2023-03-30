@@ -1,11 +1,13 @@
 import express from "express";
+import { verifyToken } from "../utils/middlewares";
 import { ScanController } from "./scanController";
 
 class ScanRouter {
   scanController = new ScanController();
   scanRoutes = express.Router();
   constructor() {
-    this.scanRoutes.post("/scans", this.scanController.getScans);
+    this.scanRoutes.post("/scans", verifyToken, this.scanController.getScans);
+    
     this.scanRoutes.post(
       "/scans/new",
       this.validUrl,

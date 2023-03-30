@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { dateFormat } from "../utils/helper";
 import { DataGrid } from "@mui/x-data-grid";
-
+import { useNavigate } from "react-router-dom";
 import FormController from "../Components/Forms/FormController";
 import { validUrl } from "../utils/helper";
-
+import { useAppContext } from "../ContextState";
 const columns = [
   { field: "url", headerName: "URL", flex: 1, sortable: false },
   {
@@ -30,8 +30,9 @@ const columns = [
 ];
 
 export default function ScanTable() {
+  const { getToken } = useAppContext();
   const [selectionModel, setSelectionModel] = useState();
-
+  const navigate = useNavigate();
   const [data, setData] = useState();
   const [searchValue, setSearchValue] = useState("");
   const [paginationModel, setPaginationModel] = React.useState({
@@ -56,16 +57,23 @@ export default function ScanTable() {
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
+        authorization: `Bearer ${getToken()}`,
       },
     })
       .then((response) => response.json())
-      .then((res) => setData(res));
+      .then((data) => {
+        if (data.code === "401") {
+          navigate(`/user/signin`);
+        }
+        setData(data);
+      });
   }, [
     paginationModel.page,
     paginationModel.pageSize,
     sortingModel.field,
     sortingModel.sort,
     searchValue,
+    navigate,
   ]);
 
   const handleCallback = useCallback(() => {
